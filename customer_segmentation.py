@@ -8,8 +8,7 @@ Created on Sat Oct 21 17:26:47 2023
 
 import pandas as pd
 import numpy as np 
-import matplotlib as plt
-import sklearn
+import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
@@ -22,6 +21,8 @@ train_df =  pd.read_csv("train.csv")
 train_copy = train_df.copy()
 
 label_encoder = preprocessing.LabelEncoder()
+
+print(train_df['Segmentation'].unique())
 
 train_copy['Gender']= label_encoder.fit_transform(train_copy['Gender']) 
 train_copy['Ever_Married']= label_encoder.fit_transform(train_copy['Ever_Married'])
@@ -43,10 +44,9 @@ print(train_Knn)
 train_Knn = pd.DataFrame(train_Knn , columns=[train_cols])
 print(train_Knn)
 
-from sklearn.cluster import KMeans
 cs = []
 for i in range(1, 11):
-    kmeans = KMeans(n_clusters = i, init = 'k-means++', max_iter = 300, n_init = 10, random_state = 0)
+    kmeans = KMeans(n_clusters = i, init = 'k-means++', max_iter = 300, n_init = 'auto', random_state = 0)
     kmeans.fit(train_Knn)
     cs.append(kmeans.inertia_)
 plt.plot(range(1, 11), cs)
