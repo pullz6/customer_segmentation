@@ -31,7 +31,10 @@ train_copy['Profession']= label_encoder.fit_transform(train_copy['Profession'])
 train_copy['Var_1']= label_encoder.fit_transform(train_copy['Var_1']) 
 train_copy['Segmentation']= label_encoder.fit_transform(train_copy['Segmentation']) 
 
-print(train_copy.describe())
+#Filling missing values
+train_copy['Work_Experience']=train_copy['Work_Experience'].fillna(train_copy['Work_Experience'].mean())
+train_copy['Family_Size']=train_copy['Family_Size'].fillna(train_copy['Family_Size'].mean())
+
 
 train_cols = train_copy.columns 
 ms = MinMaxScaler()
