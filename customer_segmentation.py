@@ -14,6 +14,8 @@ from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
 from sklearn import preprocessing 
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.cluster import AgglomerativeClustering 
+import scipy.cluster.hierarchy as sch
 
 test_df =  pd.read_csv("test.csv")
 train_df =  pd.read_csv("train.csv")
@@ -36,10 +38,10 @@ train_copy['Segmentation']= label_encoder.fit_transform(train_copy['Segmentation
 train_copy['Work_Experience']=train_copy['Work_Experience'].fillna(train_copy['Work_Experience'].mean())
 train_copy['Family_Size']=train_copy['Family_Size'].fillna(train_copy['Family_Size'].mean())
 
-
+#Kmeans clustering
 train_cols = train_copy.columns 
 ms = MinMaxScaler()
-train_Knn = ms.fit_transform(train_copy)
+train_Knn = ms.fit_transform(train_copy) 
 print(train_Knn)
 train_Knn = pd.DataFrame(train_Knn , columns=[train_cols])
 print(train_Knn)
@@ -53,5 +55,14 @@ plt.plot(range(1, 11), cs)
 plt.title('The Elbow Method')
 plt.xlabel('Number of clusters')
 plt.ylabel('CS')
+plt.show()
+
+#Hierarchial Clustering
+plt.figure(1, figsize = (16 ,8))
+dendrogram = sch.dendrogram(sch.linkage(train_copy, method  = "ward"))
+
+plt.title('Dendrogram')
+plt.xlabel('Customers')
+plt.ylabel('Euclidean distances')
 plt.show()
 
