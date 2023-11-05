@@ -92,4 +92,15 @@ knn.fit(x_train, y_train)
 y_pred = knn.predict(x_test)
 test_df['Predicted Segmenation'] = y_pred
 
+train_copy_plot = train_copy.groupby(['Segmentation'])['Spending_Score'].sum().reset_index()
+
+# sort it by spending score and make a horizontal bar plot!
+train_copy_plot.sort_values(['Spending_Score'], ascending=False).plot(kind='barh', y='Spending_Score', x='Segmentation', title ="Spending Score on Train Set",color=['r', 'g', 'm', 'b',],legend=False)
+
+#do the above for the test set as well
+test_df_plot = test_df.groupby(['Predicted Segmenation'])['Spending_Score'].sum().reset_index()
+
+# sort it by spending score and make a horizontal bar plot!
+test_df_plot.sort_values(['Spending_Score'], ascending=False).plot(kind='barh', y='Spending_Score', x='Predicted Segmenation', title ="Spending Score on Test Set",color=['r', 'g', 'm', 'b',],legend=False)
+
 
