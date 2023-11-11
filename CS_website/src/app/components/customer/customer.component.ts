@@ -15,4 +15,13 @@ export class CustomerComponent implements OnInit {
   ngOnInit():void{
     this.customerService.getCustomer().subscribe((customers)=>this.customers = customers);
   }
+
+  deleteCustomer(customer: Customer){
+    this.customerService.deleteCustomer(customer).subscribe(()=>(this.customers = this.customers.filter((c) => c.id !== customer.id)));
+  }
+
+  toggleReminder(customer : Customer){
+    console.log(124)
+  }
+
 }

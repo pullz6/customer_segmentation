@@ -1,4 +1,5 @@
-<div class="task">
+<div class="task" (dblclick) = "onToggle(Customer)">
     <h3>{{Customer.id}}</h3>
     <p>{{Customer.Gender}}</p>
+    <button (click) = "onDelete(Customer)"> Delete</button>
 </div>

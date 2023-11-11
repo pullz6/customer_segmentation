@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { Customer } from "src/app/Customer";
 
 @Component({
@@ -18,6 +18,19 @@ export class CustomerItemComponent {
     Spending_Score :"",
     Family_Size : 0,
     Var_1 : 0,
-  }; 
+  };
+  
+  @Output() onDeleteCustomer : EventEmitter<Customer> = new EventEmitter()
+  @Output() onToggleReminder : EventEmitter<Customer> = new EventEmitter()
+
+  onDelete(Customer) {
+    this.onDeleteCustomer.emit(Customer)
+  };
+
+  onToggle(Customer) {
+    this.onToggleReminder.emit(Customer)
+  };
+
+
 
 }

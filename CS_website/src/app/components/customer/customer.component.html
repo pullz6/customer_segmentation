@@ -1,2 +1,3 @@
-<app-customer-item *ngFor="let Customer of customers" [Customer]="Customer">
+<app-add-customer></app-add-customer>
+<app-customer-item *ngFor="let Customer of customers" [Customer]="Customer" (onDeleteCustomer) = "deleteCustomer(Customer)" (onToggleReminder) = "toggleReminder(Customer)">
 </app-customer-item>
